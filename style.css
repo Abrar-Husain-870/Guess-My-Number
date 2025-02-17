@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+:root {
+  --color-background: linear-gradient(135deg, #1a1c2c, #2a2d3f);
+  --color-win: linear-gradient(135deg, #43a047, #66bb6a);
+  --color-lose: linear-gradient(135deg, #c62828, #e53935);
+  --color-text: #eee;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-default: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --border-radius-sm: 10px;
+  --border-radius-md: 15px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --transition-default: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Press Start 2P', sans-serif;
+  color: var(--color-text);
+  background: var(--color-background);
+  min-height: 100vh;
+  transition: var(--transition-default);
+}
+
+body.win {
+  background: var(--color-win);
+}
+
+body.lose {
+  background: var(--color-lose);
+}
+
+/* Header Styles */
+header {
+  position: relative;
+  height: 35vh;
+  border-bottom: 7px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-default);
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.between {
+  font-size: 1.4rem;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--color-surface);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: blur(5px);
+}
+
+/* Main Game Area */
+main {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  height: 65vh;
+  color: var(--color-text);
+}
+
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Game Components */
+.number {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 6rem;
+  width: 15rem;
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: var(--transition-default);
+}
+
+.message {
+  margin-bottom: 8rem;
+  height: 5rem;
+  font-size: 2rem;
+  text-align: center;
+  background: var(--color-surface);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: blur(5px);
+  box-shadow: var(--shadow-default);
+}
+
+/* Input Elements */
+.guess,
+.lowerlimit,
+.higherlimit,
+.guessesLimit {
+  background: var(--color-surface);
+  border: 2px solid var(--border-color);
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-default);
+  backdrop-filter: blur(5px);
+}
+
+.guess {
+  font-size: 5rem;
+  padding: 2.5rem;
+  width: 25rem;
+  margin-bottom: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+}
+
+.lowerlimit,
+.higherlimit,
+.guessesLimit {
+  font-size: 2rem;
+  margin: 2%;
+  padding: var(--spacing-sm);
+  width: 12rem;
+}
+
+/* Buttons */
+.btn,
+.generate,
+.limitbtn-both {
+  background: var(--color-surface);
+  border: 1px solid var(--border-color);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 2rem;
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-default);
+  backdrop-filter: blur(5px);
+  width: 100%;
+}
+
+.btn:hover,
+.generate:hover,
+.limitbtn-both:hover {
+  background: var(--color-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn:active,
+.generate:active,
+.limitbtn-both:active {
+  transform: translateY(0);
+}
+
+/* Score Display */
+.score,
+.label-highscore {
+  font-size: 2rem;
+  text-align: center;
+  background: var(--color-surface);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  margin: var(--spacing-sm) 0;
+  backdrop-filter: blur(5px);
+  transition: var(--transition-default);
+}
+
+/* Game Sections */
+.limits-container,
+.guess-section {
+  flex: 1;
+  max-width: 35rem;
+  min-height: 20rem;
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  backdrop-filter: blur(5px);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.guess-section {
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-wrapper {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .limits-container,
+  .guess-section {
+    max-width: 100%;
+    min-height: 22rem;
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
+  
+  main {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .btn,
+  .generate,
+  .limitbtn-both,
+  .guess {
+    width: 100%;
+  }
+  
+  .number {
+    font-size: 4rem;
+    width: 12rem;
+  }
+  
+  .generate,
+  .limitbtn-both {
+    font-size: 1.6rem;
+    padding: 1.2rem var(--spacing-md);
+  }
+}
+
+/* Previous CSS remains the same until the main section */
+
+main {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  height: 65vh;
+  color: var(--color-text);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 50%;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  max-width: 50%;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.limits-container,
+.guess-section {
+  width: 100%;
+  max-width: none;
+  min-height: 20rem;
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  backdrop-filter: blur(5px);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.message {
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+}
+
+.score,
+.label-highscore {
+  width: 100%;
+}
+
+/* Update responsive design */
+@media (max-width: 968px) {
+  main {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left,
+  .right {
+    max-width: 100%;
+  }
+
+  .game-wrapper {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: var(--spacing-sm);
+  }
+  
+  .limits-container,
+  .guess-section {
+    padding: var(--spacing-md);
+  }
+}
+
+/* Rest of the previous CSS remains the same */
